@@ -10,6 +10,7 @@ class CafeXSpec extends  WordSpec with Matchers {
     "Calling generateBill" should {
       "return number" in {
         cafe.generateBill() shouldBe 1
+
       }
     }
   }
