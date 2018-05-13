@@ -28,37 +28,37 @@ class CafeX {
 
    }
    }
-    val bill = mItems.foldLeft(BigDecimal(0))((a,b)=> a + b.price)
-    val tax = generateServiceCharge(mItems,bill)
-    bill + tax
+    generateServiceCharge(mItems)
+
   }
 
-  def generateServiceCharge(menuItems:Seq[MenuItems], totalBill:BigDecimal) = {
+  def generateServiceCharge(menuItems:Seq[MenuItems]) = {
 
-   val (food,hotfood) =  checkFoodAndHotFood(menuItems)
+   val (food,hotfood,bill) =  checkFoodAndHotFood(menuItems)
    val serviceTax = (food,hotfood)match  {
      case (true,true) => {
-       val serviceCharge = totalBill * 0.2
-       if (serviceCharge <= 20.0) serviceCharge else BigDecimal(20.0)
+       val serviceCharge = bill * 0.2
+       bill + (if (serviceCharge <= 20.0) serviceCharge  else BigDecimal(20.0))
      }
-     case (true,false) => totalBill * 0.1
-     case _ => BigDecimal(0.0)
+     case (true,false) => bill + (bill * 0.1)
+     case _ => bill
    }
     serviceTax
   }
 
 
-  def checkFoodAndHotFood (items:Seq[MenuItems]) : (Boolean,Boolean) = {
+  def checkFoodAndHotFood (items:Seq[MenuItems]) : (Boolean,Boolean,BigDecimal) = {
     @tailrec
-    def checkFoodItems(itemList:Seq[MenuItems],isFood : Boolean, isHotFood:Boolean) : (Boolean,Boolean)= {
+    def checkFoodItems(itemList:Seq[MenuItems],isFood : Boolean, isHotFood:Boolean, totalBil:BigDecimal) : (Boolean,Boolean,BigDecimal)= {
       if (itemList.isEmpty) {
-        (isFood,isHotFood)
+        (isFood,isHotFood,totalBil)
       } else {
         checkFoodItems(itemList.tail,
           if (isFood) isFood else itemList.head.menuType == "Food",
-          if (isHotFood) isHotFood else itemList.head.beverageType == "Hot")
+          if (isHotFood) isHotFood else itemList.head.beverageType == "Hot",
+        itemList.head.price+totalBil)
       }
     }
-    checkFoodItems(items,false,false)
+    checkFoodItems(items,false,false,BigDecimal(0.0))
   }
 }

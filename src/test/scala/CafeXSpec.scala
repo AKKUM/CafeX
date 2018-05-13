@@ -35,30 +35,30 @@ class CafeXSpec extends  WordSpec with Matchers {
     }
     "Calling generateServiceCharge" should {
       "return no service charge for drink item" in {
-        cafe.generateServiceCharge(Seq(Cola), 0.5) shouldBe 0.0
+        cafe.generateServiceCharge(Seq(Cola)) shouldBe 0.5
       }
       "return 10% service charge for food item" in {
-        cafe.generateServiceCharge(Seq(CheeseSandwich),2.0) shouldBe 0.2
+        cafe.generateServiceCharge(Seq(CheeseSandwich)) shouldBe 2.20
       }
       "return 20% service charge for hod food item" in {
-        cafe.generateServiceCharge(Seq(SteakSandwich),4.5) shouldBe 0.9
+        cafe.generateServiceCharge(Seq(SteakSandwich)) shouldBe 5.40
       }
       "return max £20  for service charge if service charge is more than 20 for multiple items" in {
         cafe.generateServiceCharge(Seq(CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,
           SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,
           SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich)
-          ,110) shouldBe 20.0
+          ) shouldBe 130.0
       }
     }
     "Calling CheckFoodAndHotFood" should {
       "return (false,false) for drink and misc items" in {
-        cafe.checkFoodAndHotFood(Seq(Cola)) shouldBe (false,false)
+        cafe.checkFoodAndHotFood(Seq(Cola)) shouldBe (false,false,0.5)
       }
       "return (true,false) for drink and misc items" in {
-        cafe.checkFoodAndHotFood(Seq(CheeseSandwich,Cola)) shouldBe (true,false)
+        cafe.checkFoodAndHotFood(Seq(CheeseSandwich,Cola)) shouldBe (true,false,2.5)
       }
       "return (true,true) for drink and misc items" in {
-        cafe.checkFoodAndHotFood(Seq(SteakSandwich,CheeseSandwich,Cola)) shouldBe (true,true)
+        cafe.checkFoodAndHotFood(Seq(SteakSandwich,CheeseSandwich,Cola)) shouldBe (true,true,7.0)
       }
     }
   }
