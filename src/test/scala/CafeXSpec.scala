@@ -17,11 +17,11 @@ class CafeXSpec extends  WordSpec with Matchers {
 
       }
       "return 2.0 for food item Cheese Sandwich" in {
-        cafe.generateBill(Seq("Cheese Sandwich")) shouldBe 2.0
+        cafe.generateBill(Seq("Cheese Sandwich")) shouldBe 2.20
 
       }
       "return 4.5 for food item Steak Sandwich" in {
-        cafe.generateBill(Seq("Steak Sandwich")) shouldBe 4.5
+        cafe.generateBill(Seq("Steak Sandwich")) shouldBe 5.40
 
       }
       "return 0.0 for Other food item (Misc)" in {
@@ -29,7 +29,7 @@ class CafeXSpec extends  WordSpec with Matchers {
 
       }
       "return 3.5 for Cola Coffee and Chees Sandwich" in {
-        cafe.generateBill(Seq("Cola","Coffee","Cheese Sandwich")) shouldBe 3.5
+        cafe.generateBill(Seq("Cola","Coffee","Cheese Sandwich")) shouldBe 4.20
 
       }
     }

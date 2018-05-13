@@ -17,7 +17,7 @@ case object Other extends MenuItems("Misc","Misc","Misc",0.0)
 class CafeX {
 
   def generateBill(menuItems:Seq[String]) : BigDecimal = {
-   menuItems.map{ item =>
+   val mItems = menuItems.map{ item =>
 
      item match {
      case "Cola" => Cola
@@ -27,20 +27,14 @@ class CafeX {
      case _ => Other
 
    }
-   }.foldLeft(BigDecimal(0))((a,b)=> a + b.price)
+   }
+    val bill = mItems.foldLeft(BigDecimal(0))((a,b)=> a + b.price)
+    val tax = generateServiceCharge(mItems,bill)
+    bill + tax
   }
 
   def generateServiceCharge(menuItems:Seq[MenuItems], totalBill:BigDecimal) = {
-/*    val food = menuItems.find(_.menuType == "Food")
-    val hotfood = menuItems.find(data => data.menuType == "Food" && data.beverageType == "Hot")
-    food match {
-      case Some(x) if(hotfood.isDefined) => {
-        val serviceCharge = totalBill * 0.2
-        if (serviceCharge <= 20.0) serviceCharge else BigDecimal(20.0)
-      }
-      case Some(x) => totalBill * 0.1
-      case _ => 0.0
-    }*/
+
    val (food,hotfood) =  checkFoodAndHotFood(menuItems)
    val serviceTax = (food,hotfood)match  {
      case (true,true) => {
@@ -48,7 +42,7 @@ class CafeX {
        if (serviceCharge <= 20.0) serviceCharge else BigDecimal(20.0)
      }
      case (true,false) => totalBill * 0.1
-     case _ => 0.0
+     case _ => BigDecimal(0.0)
    }
     serviceTax
   }
