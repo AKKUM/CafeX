@@ -8,8 +8,8 @@ class CafeXSpec extends  WordSpec with Matchers {
   val cafe = new CafeX
   "CafeX" when {
     "Calling generateBill" should {
-      "return number" in {
-        cafe.generateBill() shouldBe 1
+      "return 0.5 for food item Cola" in {
+        cafe.generateBill("Cola") shouldBe 0.5
 
       }
     }

@@ -5,7 +5,7 @@ package com.cafe
  */
 class CafeX {
 
-  def generateBill() : BigDecimal = {
+  def generateBill(menuItem:String) : BigDecimal = {
    1.0
   }
 }
