@@ -10,6 +10,7 @@ class CafeX {
      case "Cola" => 0.5
      case "Coffee" => 1.0
      case "Cheese Sandwich" => 2.0
+     case "Steak Sandwich" => 4.5
 
    }
   }
