@@ -6,6 +6,9 @@ package com.cafe
 class CafeX {
 
   def generateBill(menuItem:String) : BigDecimal = {
-   0.5
+   menuItem match {
+     case "Cola" => 0.5
+     case "Coffee" => 1.0
+   }
   }
 }
