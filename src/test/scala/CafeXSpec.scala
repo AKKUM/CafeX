@@ -43,7 +43,12 @@ class CafeXSpec extends  WordSpec with Matchers {
       "return 20% service charge for hod food item" in {
         cafe.generateServiceCharge(Seq(SteakSandwich),4.5) shouldBe 0.9
       }
-
+      "return max £20  for service charge if service charge is more than 20 for multiple items" in {
+        cafe.generateServiceCharge(Seq(CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,CheeseSandwich,
+          SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,
+          SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich,SteakSandwich)
+          ,110) shouldBe 20.0
+      }
     }
   }
 

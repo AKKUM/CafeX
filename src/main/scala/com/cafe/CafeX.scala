@@ -29,12 +29,15 @@ class CafeX {
   }
 
   def generateServiceCharge(menuItems:Seq[MenuItems], totalBill:BigDecimal) = {
-    val food = menuItems.exists(_.menuType == "Food")
-    val hotfood = menuItems.exists(data => data.menuType == "Food" && data.beverageType == "Hot")
+    val food = menuItems.find(_.menuType == "Food")
+    val hotfood = menuItems.find(data => data.menuType == "Food" && data.beverageType == "Hot")
     food match {
-      case true if(hotfood) => totalBill * 0.2
-      case true => totalBill * 0.1
-      case false => 0.0
+      case Some(x) if(hotfood.isDefined) => {
+        val serviceCharge = totalBill * 0.2
+        if (serviceCharge <= 20.0) serviceCharge else BigDecimal(20.0)
+      }
+      case Some(x) => totalBill * 0.1
+      case _ => 0.0
     }
   }
 }
