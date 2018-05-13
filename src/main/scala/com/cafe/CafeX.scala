@@ -28,7 +28,7 @@ class CafeX {
 
    }
    }
-    generateServiceCharge(mItems)
+    generateServiceCharge(mItems).setScale(2)
 
   }
 

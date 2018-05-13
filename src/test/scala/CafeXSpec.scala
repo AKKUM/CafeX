@@ -9,11 +9,11 @@ class CafeXSpec extends  WordSpec with Matchers {
   "CafeX" when {
     "Calling generateBill" should {
       "return 0.5 for food item Cola" in {
-        cafe.generateBill(Seq("Cola")) shouldBe 0.5
+        cafe.generateBill(Seq("Cola")) shouldBe 0.50
 
       }
       "return 1.0 for food item Coffee" in {
-        cafe.generateBill(Seq("Coffee")) shouldBe 1.0
+        cafe.generateBill(Seq("Coffee")) shouldBe 1.00
 
       }
       "return 2.0 for food item Cheese Sandwich" in {
@@ -25,7 +25,7 @@ class CafeXSpec extends  WordSpec with Matchers {
 
       }
       "return 0.0 for Other food item (Misc)" in {
-        cafe.generateBill(Seq("Other")) shouldBe 0.0
+        cafe.generateBill(Seq("Other")) shouldBe 0.00
 
       }
       "return 3.5 for Cola Coffee and Chees Sandwich" in {
@@ -35,7 +35,7 @@ class CafeXSpec extends  WordSpec with Matchers {
     }
     "Calling generateServiceCharge" should {
       "return no service charge for drink item" in {
-        cafe.generateServiceCharge(Seq(Cola)) shouldBe 0.5
+        cafe.generateServiceCharge(Seq(Cola)) shouldBe 0.50
       }
       "return 10% service charge for food item" in {
         cafe.generateServiceCharge(Seq(CheeseSandwich)) shouldBe 2.20
