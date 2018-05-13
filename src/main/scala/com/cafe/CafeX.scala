@@ -29,9 +29,9 @@ class CafeX {
   }
 
   def generateServiceCharge(menuItems:Seq[MenuItems]) = {
-    val drink = menuItems.exists(_.menuType == "Drink")
-    drink match {
-      case true => 0.0
+    val food = menuItems.exists(_.menuType == "Food")
+    food match {
+      case true => 0.2
       case false => 0.0
     }
   }
