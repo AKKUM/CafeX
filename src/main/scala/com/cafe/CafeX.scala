@@ -3,19 +3,28 @@ package com.cafe
 /**
  * Created by akhileshkumar on 13/05/2018.
  */
+sealed abstract class MenuItems(val name:String,val menuType :String,val price:BigDecimal)
+
+case object Cola extends MenuItems("Cola","Cold",0.5)
+case object Coffee extends MenuItems("Coffee","Hot",1.0)
+case object CheeseSandwich extends MenuItems("Cheese Sandwich","Cold",2.0)
+case object SteakSandwich extends MenuItems("Steak Sandwich","Hot",4.5)
+case object Other extends MenuItems("Misc","Misc",0.0)
+
+
 class CafeX {
 
   def generateBill(menuItems:Seq[String]) : BigDecimal = {
    menuItems.map{ item =>
 
      item match {
-     case "Cola" => 0.5
-     case "Coffee" => 1.0
-     case "Cheese Sandwich" => 2.0
-     case "Steak Sandwich" => 4.5
-     case _ => 0.0
+     case "Cola" => Cola
+     case "Coffee" => Coffee
+     case "Cheese Sandwich" => CheeseSandwich
+     case "Steak Sandwich" => SteakSandwich
+     case _ => Other
 
    }
-   }.foldLeft(BigDecimal(0))((a,b)=> a + b)
+   }.foldLeft(BigDecimal(0))((a,b)=> a + b.price)
   }
 }
