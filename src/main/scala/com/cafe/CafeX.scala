@@ -5,8 +5,10 @@ package com.cafe
  */
 class CafeX {
 
-  def generateBill(menuItem:String) : BigDecimal = {
-   menuItem match {
+  def generateBill(menuItems:Seq[String]) : BigDecimal = {
+   menuItems.map{ item =>
+
+     item match {
      case "Cola" => 0.5
      case "Coffee" => 1.0
      case "Cheese Sandwich" => 2.0
@@ -14,5 +16,6 @@ class CafeX {
      case _ => 0.0
 
    }
+   }.foldLeft(BigDecimal(0))((a,b)=> a + b)
   }
 }
