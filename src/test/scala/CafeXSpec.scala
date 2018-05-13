@@ -1,4 +1,4 @@
-import com.cafe.CafeX
+import com.cafe.{Cola, CafeX}
 import org.scalatest.{Matchers, WordSpec}
 
 /**
@@ -35,7 +35,7 @@ class CafeXSpec extends  WordSpec with Matchers {
     }
     "Calling generateServiceCharge" should {
       "return no service charge for drink item" in {
-        cafe.generateServiceCharge(Seq("Cola")) shouldBe 0.0
+        cafe.generateServiceCharge(Seq(Cola)) shouldBe 0.0
       }
     }
   }

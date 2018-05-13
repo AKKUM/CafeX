@@ -3,13 +3,13 @@ package com.cafe
 /**
  * Created by akhileshkumar on 13/05/2018.
  */
-sealed abstract class MenuItems(val name:String,val menuType :String,val price:BigDecimal)
+sealed abstract class MenuItems(val name:String,val menuType :String,val beverageType:String, val price:BigDecimal)
 
-case object Cola extends MenuItems("Cola","Cold",0.5)
-case object Coffee extends MenuItems("Coffee","Hot",1.0)
-case object CheeseSandwich extends MenuItems("Cheese Sandwich","Cold",2.0)
-case object SteakSandwich extends MenuItems("Steak Sandwich","Hot",4.5)
-case object Other extends MenuItems("Misc","Misc",0.0)
+case object Cola extends MenuItems("Cola","Drink","Cold",0.5)
+case object Coffee extends MenuItems("Coffee","Drink","Hot",1.0)
+case object CheeseSandwich extends MenuItems("Cheese Sandwich","Food","Cold",2.0)
+case object SteakSandwich extends MenuItems("Steak Sandwich","Food","Hot",4.5)
+case object Other extends MenuItems("Misc","Misc","Misc",0.0)
 
 
 class CafeX {
@@ -28,7 +28,11 @@ class CafeX {
    }.foldLeft(BigDecimal(0))((a,b)=> a + b.price)
   }
 
-  def generateServiceCharge(menuItems:Seq[String]) = {
-
+  def generateServiceCharge(menuItems:Seq[MenuItems]) = {
+    val drink = menuItems.exists(_.menuType == "Drink")
+    drink match {
+      case true => 0.0
+      case false => 0.0
+    }
   }
 }
