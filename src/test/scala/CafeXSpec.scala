@@ -24,7 +24,10 @@ class CafeXSpec extends  WordSpec with Matchers {
         cafe.generateBill("Steak Sandwich") shouldBe 4.5
 
       }
+      "return 0.0 for Other food item (Misc)" in {
+        cafe.generateBill("Other") shouldBe 0.0
 
+      }
     }
   }
 
