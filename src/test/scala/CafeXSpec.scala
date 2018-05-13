@@ -35,13 +35,13 @@ class CafeXSpec extends  WordSpec with Matchers {
     }
     "Calling generateServiceCharge" should {
       "return no service charge for drink item" in {
-        cafe.generateServiceCharge(Seq(Cola)) shouldBe 0.0
+        cafe.generateServiceCharge(Seq(Cola), 0.5) shouldBe 0.0
       }
       "return 10% service charge for food item" in {
-        cafe.generateServiceCharge(Seq(CheeseSandwich)) shouldBe 0.2
+        cafe.generateServiceCharge(Seq(CheeseSandwich),2.0) shouldBe 0.2
       }
       "return 20% service charge for hod food item" in {
-        cafe.generateServiceCharge(Seq(SteakSandwich)) shouldBe 0.9
+        cafe.generateServiceCharge(Seq(SteakSandwich),4.5) shouldBe 0.9
       }
 
     }

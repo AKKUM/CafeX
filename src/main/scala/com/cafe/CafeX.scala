@@ -28,12 +28,12 @@ class CafeX {
    }.foldLeft(BigDecimal(0))((a,b)=> a + b.price)
   }
 
-  def generateServiceCharge(menuItems:Seq[MenuItems]) = {
+  def generateServiceCharge(menuItems:Seq[MenuItems], totalBill:BigDecimal) = {
     val food = menuItems.exists(_.menuType == "Food")
     val hotfood = menuItems.exists(data => data.menuType == "Food" && data.beverageType == "Hot")
     food match {
-      case true if(hotfood) => 0.9
-      case true => 0.2
+      case true if(hotfood) => totalBill * 0.2
+      case true => totalBill * 0.1
       case false => 0.0
     }
   }
