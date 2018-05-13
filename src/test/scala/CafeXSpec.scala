@@ -1,4 +1,4 @@
-import com.cafe.{CheeseSandwich, Cola, CafeX}
+import com.cafe.{SteakSandwich, CheeseSandwich, Cola, CafeX}
 import org.scalatest.{Matchers, WordSpec}
 
 /**
@@ -40,6 +40,10 @@ class CafeXSpec extends  WordSpec with Matchers {
       "return 10% service charge for food item" in {
         cafe.generateServiceCharge(Seq(CheeseSandwich)) shouldBe 0.2
       }
+      "return 20% service charge for hod food item" in {
+        cafe.generateServiceCharge(Seq(SteakSandwich)) shouldBe 0.9
+      }
+
     }
   }
 
