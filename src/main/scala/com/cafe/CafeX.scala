@@ -1,5 +1,7 @@
 package com.cafe
 
+import scala.annotation.tailrec
+
 /**
  * Created by akhileshkumar on 13/05/2018.
  */
@@ -29,7 +31,7 @@ class CafeX {
   }
 
   def generateServiceCharge(menuItems:Seq[MenuItems], totalBill:BigDecimal) = {
-    val food = menuItems.find(_.menuType == "Food")
+/*    val food = menuItems.find(_.menuType == "Food")
     val hotfood = menuItems.find(data => data.menuType == "Food" && data.beverageType == "Hot")
     food match {
       case Some(x) if(hotfood.isDefined) => {
@@ -38,6 +40,31 @@ class CafeX {
       }
       case Some(x) => totalBill * 0.1
       case _ => 0.0
+    }*/
+   val (food,hotfood) =  checkFoodAndHotFood(menuItems)
+   val serviceTax = (food,hotfood)match  {
+     case (true,true) => {
+       val serviceCharge = totalBill * 0.2
+       if (serviceCharge <= 20.0) serviceCharge else BigDecimal(20.0)
+     }
+     case (true,false) => totalBill * 0.1
+     case _ => 0.0
+   }
+    serviceTax
+  }
+
+
+  def checkFoodAndHotFood (items:Seq[MenuItems]) : (Boolean,Boolean) = {
+    @tailrec
+    def checkFoodItems(itemList:Seq[MenuItems],isFood : Boolean, isHotFood:Boolean) : (Boolean,Boolean)= {
+      if (itemList.isEmpty) {
+        (isFood,isHotFood)
+      } else {
+        checkFoodItems(itemList.tail,
+          if (isFood) isFood else itemList.head.menuType == "Food",
+          if (isHotFood) isHotFood else itemList.head.beverageType == "Hot")
+      }
     }
+    checkFoodItems(items,false,false)
   }
 }

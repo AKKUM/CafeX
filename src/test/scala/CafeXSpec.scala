@@ -50,6 +50,17 @@ class CafeXSpec extends  WordSpec with Matchers {
           ,110) shouldBe 20.0
       }
     }
+    "Calling CheckFoodAndHotFood" should {
+      "return (false,false) for drink and misc items" in {
+        cafe.checkFoodAndHotFood(Seq(Cola)) shouldBe (false,false)
+      }
+      "return (true,false) for drink and misc items" in {
+        cafe.checkFoodAndHotFood(Seq(CheeseSandwich,Cola)) shouldBe (true,false)
+      }
+      "return (true,true) for drink and misc items" in {
+        cafe.checkFoodAndHotFood(Seq(SteakSandwich,CheeseSandwich,Cola)) shouldBe (true,true)
+      }
+    }
   }
 
 }
