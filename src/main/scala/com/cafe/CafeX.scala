@@ -27,4 +27,8 @@ class CafeX {
    }
    }.foldLeft(BigDecimal(0))((a,b)=> a + b.price)
   }
+
+  def generateServiceCharge(menuItems:Seq[String]) = {
+
+  }
 }

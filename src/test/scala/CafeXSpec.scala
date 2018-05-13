@@ -33,6 +33,11 @@ class CafeXSpec extends  WordSpec with Matchers {
 
       }
     }
+    "Calling generateServiceCharge" should {
+      "return no service charge for drink item" in {
+        cafe.generateServiceCharge(Seq("Cola")) shouldBe 0.0
+      }
+    }
   }
 
 }
